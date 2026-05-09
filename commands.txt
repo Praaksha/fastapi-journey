@@ -1,0 +1,2 @@
+for installing FastAPI - pip install fastapi uvicorn
+for running code - uvicorn main:app --reload  # main - file name, app - fast api object
