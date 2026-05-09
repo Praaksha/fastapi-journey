@@ -1,2 +1,14 @@
 for installing FastAPI - pip install fastapi uvicorn
 for running code - uvicorn main:app --reload  # main - file name, app - fast api object
+
+
+
+
+GIT commands:
+git init - to initialise git in local
+git status - to check the current status of all files in the current folder
+git add . - to add files into staging
+git commit -m "commit name" - to commit the changes
+git remote add origin git_path - connect to the git repo
+git branch -M main - to change the branch to main
+git push -u origin main - to push the code into git repopsitory
