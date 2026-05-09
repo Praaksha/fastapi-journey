@@ -12,3 +12,18 @@ git commit -m "commit name" - to commit the changes
 git remote add origin git_path - connect to the git repo
 git branch -M main - to change the branch to main
 git push -u origin main - to push the code into git repopsitory
+
+
+Dockerfile contents
+
+FROM python:3.12
+
+WORKDIR /app
+
+COPY requirements.txt .
+
+RUN pip install -r requirements.txt
+
+COPY . .
+
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
