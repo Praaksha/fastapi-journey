@@ -27,3 +27,16 @@ RUN pip install -r requirements.txt
 COPY . .
 
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+
+
+Installation and setup of PostgresSQL
+pip install psycopg2-binary
+
+
+Creating environment variable
+pip install python-dotenv
+create .env file and add environment variable without spaces, Eg: DB_HOST=myhost
+import os
+from dotenv import load_dotenv
+load_dotenv()
+when we want to use env variable get that by os.getenv("DB_HOST)
