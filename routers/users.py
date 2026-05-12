@@ -6,9 +6,9 @@ import json
 from database import db_connection
 
 
-# class User(BaseModel):
-#     user_id:int
-#     user_name:str
+class User(BaseModel):
+    user_name:str
+    email:str
 
 router = APIRouter(
     prefix="/users",
@@ -35,6 +35,35 @@ def get_user(user_id: int):
     conn.close()
     return res
 
-# @router.post("/")
-# def create_user(user:User):
-#     return user
+@router.post("/")
+def create_user(user:User):
+    conn = db_connection()
+    curr = conn.cursor()
+    curr.execute(f"Insert into users (user_name, email) values ('{user.user_name}', '{user.email}') RETURNING *")
+    new_user = curr.fetchone()
+    curr.close()
+    conn.commit()
+    conn.close()
+    return new_user
+
+@router.put("/{user_id}")
+def update_user(user_id:int, user:User):
+    conn = db_connection()
+    curr = conn.cursor()
+    curr.execute(f"Update users set user_name='{user.user_name}', email='{user.email}' where user_id={user_id} RETURNING *")
+    updated_user = curr.fetchone()
+    curr.close()
+    conn.commit()
+    conn.close()
+    return updated_user
+
+@router.delete("/{user_id}")
+def delete_user(user_id):
+    conn = db_connection()
+    curr = conn.cursor()
+    curr.execute(f"Delete from users where user_id={user_id} RETURNING *")
+    deleted_user = curr.fetchone()
+    curr.close()
+    conn.commit()
+    conn.close()
+    return deleted_user
